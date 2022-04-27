@@ -35,7 +35,6 @@ namespace RevitFinalPlugin
 
             Transaction transaction = new Transaction(doc, "Создание и маркировка");
             transaction.Start();
-
             //List<Room> rooms = CreateRoom(doc, level);
             //метод для создания помещений
             List<Room> rooms = CreateRoom(doc, listlevel);
