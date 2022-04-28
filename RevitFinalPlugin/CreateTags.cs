@@ -41,7 +41,7 @@ namespace RevitFinalPlugin
             //смена маркировки с добавлением уровня
             ChangeID(doc);
             //проявление маркировки для промаркированных помещений
-            //CreateTag(doc, rooms);
+            CreateTag(doc);
             transaction.Commit();
             return Result.Succeeded;
         }
@@ -101,33 +101,38 @@ namespace RevitFinalPlugin
                 }
             }
         }
-        //public void CreateTag(Document document, List<Room> rooms)
-        //{
-        //    foreach (Room room in rooms)
-        //    {
-        //        IEnumerable<RoomTag> roomTags = from elem in ((new FilteredElementCollector(document)).WherePasses(new RoomTagFilter()).ToElements())
-        //                                        let roomTag = elem as RoomTag
-        //                                        where (roomTag != null) && (roomTag.Room != null)
-        //                                        select roomTag;
-        //        foreach (RoomTag roomTagg in roomTags)
-        //        {
-        //            if (roomTagg != null)
-        //            {
-        //                break;
-        //            }
-        //            else
-        //            {
-        //                UV roomTagLocation = new UV(0, 0);
-        //                LocationPoint locationPoint = room.Location as LocationPoint;
-        //                UV point = new UV(locationPoint.Point.X, locationPoint.Point.Y);
-        //                LinkElementId roomId = new LinkElementId(room.Id);
-        //                RoomTag roomTag1 = document.Create.NewRoomTag(roomId, point, null);
-        //            }
-        //        }
+        public void CreateTag(Document document)
+        {
+            var rooms = new FilteredElementCollector(document)
+              .OfCategory(BuiltInCategory.OST_Rooms)
+              .Select(r => r as Room)
+              .ToList();
 
-        //    }
+            foreach (Room room in rooms)
+            {
+                //IEnumerable<RoomTag> roomTags = from elem in ((new FilteredElementCollector(document)).WherePasses(new RoomTagFilter()).ToElements())
+                //                                let roomTag = elem as RoomTag
+                //                                where (roomTag != null) && (roomTag.Room != null)
+                //                                select roomTag;
+                //foreach (RoomTag roomTagg in roomTags)
+                //{
+                //    if (roomTagg != null)
+                //    {
+                //        break;
+                //    }
+                //    else
+                //    {
+                        UV roomTagLocation = new UV(0, 0);
+                        LocationPoint locationPoint = room.Location as LocationPoint;
+                        UV point = new UV(locationPoint.Point.X, locationPoint.Point.Y);
+                        LinkElementId roomId = new LinkElementId(room.Id);
+                        RoomTag roomTag1 = document.Create.NewRoomTag(roomId, point, null);
+                //    }
+                //}
+
+            }
 
 
-        //}
+        }
     }
 }
