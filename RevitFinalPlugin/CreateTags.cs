@@ -91,12 +91,12 @@ namespace RevitFinalPlugin
             foreach (var Lvlid in rooms)
             {
                 string lvlName = document.GetElement(Lvlid.Key).Name;
-                lvlName = lvlName.Replace("Уровень ", "");
+                lvlName = lvlName.Replace("Уровень ", " ");
                 int number = 1;
                 Room tmpRoom = rooms.FirstOrDefault() as Room;
                 foreach (var item in Lvlid)
                 {
-                    item.LookupParameter("Номер").Set(lvlName + "_" + number.ToString());
+                    item.LookupParameter("Номер").Set(lvlName + " " + number.ToString());
                     number++;
                 }
             }
