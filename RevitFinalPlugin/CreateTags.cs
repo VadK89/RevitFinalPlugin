@@ -96,7 +96,7 @@ namespace RevitFinalPlugin
                 Room tmpRoom = rooms.FirstOrDefault() as Room;
                 foreach (var item in Lvlid)
                 {
-                    item.LookupParameter("Номер").Set(lvlName + " " + number.ToString());
+                    item.LookupParameter("Номер").Set(lvlName + "-" + number.ToString());
                     number++;
                 }
             }
@@ -118,16 +118,16 @@ namespace RevitFinalPlugin
         //            else
         //            {
         //                UV roomTagLocation = new UV(0, 0);
-
-        //                Create a new room tag in the created room
-        //               LinkElementId roomId = new LinkElementId(room.Id);
-        //                RoomTag roomTagg = document.Create.NewRoomTag(roomId, roomTagLocation, ElementId.InvalidElementId);
+        //                LocationPoint locationPoint = room.Location as LocationPoint;
+        //                UV point = new UV(locationPoint.Point.X, locationPoint.Point.Y);
+        //                LinkElementId roomId = new LinkElementId(room.Id);
+        //                RoomTag roomTag1 = document.Create.NewRoomTag(roomId, point, null);
         //            }
         //        }
 
         //    }
 
 
-        //}
+        }
     }
 }
